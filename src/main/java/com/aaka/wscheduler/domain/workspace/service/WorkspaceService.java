@@ -14,10 +14,17 @@ import org.springframework.stereotype.Service;
 public class WorkspaceService {
     private final WorkspaceRepository workspaceRepository;
 
+
     public WorkspaceResponseDto createWorkspace(WorkspaceRequestDto requestDto) {
         Workspace workspace = new Workspace(requestDto.getUserId());
         Workspace savedWorkspace = workspaceRepository.save(workspace);
 
         return new WorkspaceResponseDto(savedWorkspace);
+    }
+
+    public Long deleteWorkspace(Long userId) {
+        workspaceRepository.deleteById(userId);
+        // 예외처리
+        return userId;
     }
 }
